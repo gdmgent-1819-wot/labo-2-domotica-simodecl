@@ -8,8 +8,8 @@ import sys
 import random
 from math import floor, ceil
 
-serviceAccountKey = '../../labo2-simodecl-firebase-adminsdk-e8msv-e190f34af0.json'
-databaseURL = 'https://labo2-simodecl.firebaseio.com'
+serviceAccountKey = '../../labo2-domotica-simodecl-firebase-adminsdk-zm609-4147ea9d6d.json'
+databaseURL = 'https://labo2-domotica-simodecl.firebaseio.com'
 
 try:
     # Fetch the service account key JSON file contents
@@ -21,7 +21,7 @@ try:
     })
 
     # As an admin, the app has access to read and write all data
-    firebase_ref_arcade_characters = db.reference('arcade-characters')
+    firebase_ref_domotica = db.reference()
 except:
     print('Unable to initialize Firebase: {}'.format(sys.exc_info()[0]))
     sys.exit(1)
@@ -29,45 +29,42 @@ except:
 # constants
 COLOR_RED = (255, 0, 0)
 COLOR_BLUE = (0, 0, 255)
+COLOR_DARKBLUE = (0, 0, 128)
+COLOR_GREEN = (0, 255, 0)
+COLOR_YELLOW = (255, 255, 0)
+COLOR_DARKYELLOW = (128, 128, 0)
 COLOR_BLACK = (0, 0, 0)
 
-# get random arcade matrix
-def get_random_arcade_matrix(rows, cols):
-    pattern = ''
-    matrix = []
-    print(int(rows)*int(cols))
-    for r in range(0, int(rows)):
-        temp_str = ''
-        for c in range(0, (int(cols)//2)):
-            temp_str = temp_str + str(round(random.random()))
 
-        temp_str = temp_str + temp_str[::-1]
-        pattern = pattern + temp_str + (8-int(cols)) * '0'
-        print(pattern)
-    pattern = pattern +  (8-int(rows))* 8 * '0'
-    print('Eindpatroon: ' + pattern)
-    for p in range(0, 64):
-        bit = int(pattern[p])
-        color = COLOR_BLUE if bit == 1 else COLOR_BLACK
-        matrix.append(color)
-
-    return(matrix)
-
-def get_character_from_db():
-    characters = firebase_ref_arcade_characters.get()
+def get_domotica_from_db():
+    domoticaRef = firebase_ref_domotica.get()
     i = 0
-    character = []
-    #print(characters)
-    if characters is not None:
-        for key, val in characters.items():
-            character.append(val)
-          
-
-        while i < len(character):
-            #print(character)
-            sense_hat.set_pixels(character[i])
-            i += 1
-            sleep(1)
+    domotica = []
+    if domoticaRef is not None:
+        for key, val in domoticaRef.items():
+            print(val)
+            for p in range(0, 64):
+                letter = val[p]
+                if letter == "g":
+                    color = COLOR_GREEN
+                elif letter == "r":
+                    color = COLOR_RED
+                elif letter == "b":
+                    color = COLOR_BLUE
+                elif letter == "db":
+                    color = COLOR_DARKBLUE
+                elif letter == "y":
+                    color = COLOR_YELLOW
+                elif letter == "dy":
+                    color = COLOR_DARKYELLOW
+                else:
+                    color = COLOR_BLACK
+                            
+                domotica.append(color)
+                  
+        sense_hat.set_pixels(domotica)
+        sleep(1)
+           
 
     else:
         sense_hat.show_message("404")
@@ -81,7 +78,7 @@ except:
     
 def main():
     while True:
-        get_character_from_db()
+        get_domotica_from_db()
             
         
 if __name__ == "__main__":
