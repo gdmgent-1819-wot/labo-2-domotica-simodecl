@@ -1,5 +1,4 @@
-const firebaseRef= firebase.database().ref().child('domotica-layout')
-
+const firebaseRef= firebase.database().ref()
      
 clickableGrid = ( rows, cols, callback ) => {
     let i=0;
@@ -81,5 +80,5 @@ saveButton.addEventListener('click', () => {
         }
     }
     console.log(pattern)
-    firebaseRef.push(`${pattern}`)
+    firebaseRef.update({'domotica-layout': pattern})
 })
