@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<title>Arcade character generator</title>
+		<link rel="stylesheet" href="./assets/css/app.css">
+  </head>
+  <body>
+  
+  <h2 class="title">Domotica Application</h2>
+  <div class="login">
+    <input type="email" placeholder="Email..." id="email_field" />
+    <input type="password" placeholder="Password..." id="password_field" />
+
+    <button onclick="login()">Login to Account</button>
+  </div>
+
+  <div class="user">
+    <p class="userIntro">You are logged in!</p>
+    <button onclick="logout()">Logout</button>
+  </div>
+
+  <h3 class="title">Create your Arcade character</h3>  
+  <table class="grid"></table>
+  <button class="save saveButton">Save character</button>
+  
+	<script src="https://www.gstatic.com/firebasejs/5.5.2/firebase.js"></script>
+  <script src="./assets/js/firebaseConfig.js"></script>
+  <script src="./assets/js/login.js"></script>
+	<script src="./assets/js/app.js"></script>
+  </body>
+</html>
