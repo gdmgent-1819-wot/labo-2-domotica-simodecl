@@ -29,10 +29,10 @@ except:
 # constants
 COLOR_RED = (255, 0, 0)
 COLOR_BLUE = (0, 0, 255)
-COLOR_DARKBLUE = (0, 0, 128)
+COLOR_DARKBLUE = (0, 0, 50)
 COLOR_GREEN = (0, 255, 0)
 COLOR_YELLOW = (255, 255, 0)
-COLOR_DARKYELLOW = (128, 128, 0)
+COLOR_DARKYELLOW = (50, 50, 0)
 COLOR_BLACK = (0, 0, 0)
 
 
@@ -42,7 +42,6 @@ def get_domotica_from_db():
     domotica = []
     if domoticaRef is not None:
         for key, val in domoticaRef.items():
-            print(val)
             for p in range(0, 64):
                 letter = val[p]
                 if letter == "g":
